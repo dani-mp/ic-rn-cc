@@ -5,7 +5,9 @@ const processResponse = response => {
   return response.json().then(json => json.data);
 };
 
-export const getPics = (after = '') =>
-  fetch(`https://api.reddit.com/r/pics/new.json?limit=2&after=${after}`).then(
-    processResponse
-  );
+export const getPics = after => {
+  const afterParam = after ? `&after=${after}` : '';
+  return fetch(
+    `https://api.reddit.com/r/pics/new.json?limit=30${afterParam}`
+  ).then(processResponse);
+};
