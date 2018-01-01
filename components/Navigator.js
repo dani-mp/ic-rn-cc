@@ -1,3 +1,4 @@
+// @flow
 import * as React from 'react';
 import { StyleSheet, View, Platform, WebView } from 'react-native';
 import { StackNavigator } from 'react-navigation';

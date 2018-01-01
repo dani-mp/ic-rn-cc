@@ -1,6 +1,8 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import Item from './Item';
+import type { Pic } from 'ic-rn-cc/api/types';
 
 const styles = StyleSheet.create({
   list: {
@@ -8,10 +10,18 @@ const styles = StyleSheet.create({
   },
 });
 
-export default class extends React.Component {
-  keyExtractor = item => item.data.id;
+type Props = {
+  data: Pic[],
+  refreshing: boolean,
+  onRefresh: () => void,
+  onEndReached: () => void,
+  onSelectItem: Pic => void,
+};
 
-  renderItem = ({ item }) => (
+export default class extends React.Component<Props> {
+  keyExtractor = (item: Pic): string => item.data.id;
+
+  renderItem = ({ item }: { item: Pic }) => (
     <Item item={item} onSelect={this.props.onSelectItem} />
   );
 

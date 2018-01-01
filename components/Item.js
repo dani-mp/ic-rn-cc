@@ -1,5 +1,7 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { StyleSheet, TouchableOpacity, Image, View, Text } from 'react-native';
+import type { Pic } from 'ic-rn-cc/api/types';
 
 const spacing = 10;
 
@@ -48,14 +50,26 @@ const styles = StyleSheet.create({
   },
 });
 
-const formatDate = utc => new Date(utc * 1000).toLocaleString();
+const formatDate = (utc: number): string =>
+  new Date(utc * 1000).toLocaleString();
 
-const formatStats = ({ score, num_comments }) =>
+const formatStats = ({
+  score,
+  num_comments,
+}: {
+  score: number,
+  num_comments: number,
+}): string =>
   `${score} ${score == 1 ? 'pt' : 'pts'} · ${num_comments} ${
     num_comments == 1 ? 'com' : 'coms'
   }`;
 
-export default class extends React.PureComponent {
+type Props = {
+  item: Pic,
+  onSelect: Pic => void,
+};
+
+export default class extends React.PureComponent<Props> {
   onPress = () => this.props.onSelect(this.props.item);
 
   render() {

@@ -1,9 +1,22 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import List from './List';
 import Error from './Error';
 import { getPics } from 'ic-rn-cc/api';
+import type { Pics, Pic } from 'ic-rn-cc/api/types';
 
-export default class extends React.Component {
+type Props = {
+  onSelectItem: Pic => void,
+};
+
+type State = {
+  data: Pic[],
+  after: ?string,
+  loading: boolean,
+  error: ?string,
+};
+
+export default class extends React.Component<Props, State> {
   state = {
     data: [],
     after: null,
@@ -11,7 +24,7 @@ export default class extends React.Component {
     error: null,
   };
 
-  showNewPics = ({ children, after }) => {
+  showNewPics = ({ children, after }: Pics) => {
     this.setState(({ data }) => ({
       data: data.concat(children),
       after,
@@ -19,11 +32,11 @@ export default class extends React.Component {
     }));
   };
 
-  showError = ({ message }) => {
+  showError = ({ message }: { message: string }) => {
     this.setState({ loading: false, error: message });
   };
 
-  loadPics = reset => {
+  loadPics = (reset: boolean) => {
     if (this.state.loading) {
       return;
     }
@@ -43,7 +56,7 @@ export default class extends React.Component {
 
   render() {
     const { data, loading, error } = this.state;
-    if (error) {
+    if (error != null) {
       return <Error error={error} onRetry={this.refreshPics} />;
     }
     const { onSelectItem } = this.props;

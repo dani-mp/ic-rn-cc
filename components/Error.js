@@ -1,4 +1,5 @@
-import React from 'react';
+// @flow
+import * as React from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 
 const spacing = 10;
@@ -16,7 +17,12 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ({ error, onRetry }) => (
+type Props = {
+  error: string,
+  onRetry: () => void,
+};
+
+export default ({ error, onRetry }: Props) => (
   <View style={styles.container}>
     <Text style={styles.text}>Ups! {error}</Text>
     <Button title="Try again!" onPress={onRetry} />

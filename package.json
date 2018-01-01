@@ -5,6 +5,7 @@
   "devDependencies": {
     "eslint": "^4.14.0",
     "eslint-config-react-native-prettier": "^1.0.1",
+    "flow-bin": "^0.62.0",
     "jest-expo": "23.0.0",
     "react-native-scripts": "1.8.1",
     "react-test-renderer": "16.0.0"
@@ -17,12 +18,14 @@
     "ios": "react-native-scripts ios",
     "test": "node node_modules/jest/bin/jest.js --watch",
     "lint": "eslint .",
-    "prettier": "eslint . --fix"
+    "prettier": "eslint . --fix",
+    "flow": "flow"
   },
   "jest": {
     "preset": "jest-expo"
   },
   "dependencies": {
+    "babel-eslint": "^8.0.0",
     "expo": "^23.0.4",
     "react": "16.0.0",
     "react-native": "0.50.3",
