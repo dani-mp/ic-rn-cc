@@ -37,8 +37,6 @@ export default class extends React.Component {
 
   loadMorePics = () => this.loadPics(false);
 
-  onSelectItem = item => console.log('Selected', item);
-
   componentDidMount() {
     this.refreshPics();
   }
@@ -48,13 +46,14 @@ export default class extends React.Component {
     if (error) {
       return <Error error={error} onRetry={this.refreshPics} />;
     }
+    const { onSelectItem } = this.props;
     return (
       <List
         data={data}
         refreshing={loading && data.length == 0}
         onRefresh={this.refreshPics}
         onEndReached={this.loadMorePics}
-        onSelectItem={this.onSelectItem}
+        onSelectItem={onSelectItem}
       />
     );
   }

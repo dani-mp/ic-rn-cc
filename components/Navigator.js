@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform, WebView } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import { Constants } from 'expo';
 import ListContainer from './ListContainer';
@@ -11,11 +11,26 @@ const styles = StyleSheet.create({
   },
 });
 
+const postURL = ({ data: { permalink } }) =>
+  `https://www.reddit.com${permalink}`;
+
 const Navigator = StackNavigator({
   List: {
-    screen: ListContainer,
+    screen: ({ navigation }) => (
+      <ListContainer
+        onSelectItem={item => navigation.navigate('Post', { item })}
+      />
+    ),
     navigationOptions: {
       headerTitle: 'Pics',
+    },
+  },
+  Post: {
+    screen: ({ navigation }) => (
+      <WebView source={{ uri: postURL(navigation.state.params.item) }} />
+    ),
+    navigationOptions: {
+      headerTitle: 'Pic',
     },
   },
 });
