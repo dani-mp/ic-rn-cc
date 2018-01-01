@@ -1,4 +1,4 @@
 import React from 'react';
-import ListContainer from 'ic-rn-cc/components/ListContainer';
+import Navigator from 'ic-rn-cc/components/Navigator';
 
-export default () => <ListContainer />;
+export default () => <Navigator />;
